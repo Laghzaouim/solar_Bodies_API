@@ -6,13 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SolarBodies.Controllers
 {
-    [Route("api/[controller]")]
-    public class ValuesController : Controller
+    [Route("api/v1/[controller]")]
+    public class SolarBodiesController : Controller
     {
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            
             return new string[] { "value1", "value2" };
         }
 
