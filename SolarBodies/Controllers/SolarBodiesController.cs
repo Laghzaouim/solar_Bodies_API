@@ -8,12 +8,12 @@ using Model;
 namespace SolarBodies.Controllers
 {
     [Route("api/v1/[controller]")]
-    public class SolarBodiesController : Controller
+    public class PlanetsController : Controller
     {
         private static List<Planet> list = new List<Planet>();
 
         private readonly BodiesContext context;
-        public SolarBodiesController(BodiesContext context)
+        public PlanetsController(BodiesContext context)
         {
             this.context = context;
         }

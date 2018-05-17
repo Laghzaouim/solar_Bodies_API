@@ -44,7 +44,7 @@ namespace SolarBodies
 
             app.UseMvc();
             
-            DBInitializer.Initialize( bodiesContext);
+            DBInitializer.Initialize(bodiesContext);
             
         }
     }
