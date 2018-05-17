@@ -1,6 +1,6 @@
 namespace Model
 {
-    public class Planet
+    public class DwarfPlanet
     {
         public int Id {get; set;}
         public string name { get; set; }
