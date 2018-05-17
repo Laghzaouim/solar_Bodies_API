@@ -34,9 +34,21 @@ namespace Planets.Controllers
         }
 
         [HttpGet]         // api/v1/planets
-        public List<Planet> GetAllPlanet()
+        public List<Planet> GetAllPlanet(string name, string surface, int? page, int length = 2 )
         {
-            return context.Planets.ToList();
+            IQueryable<Planet> query = context.Planets;
+
+            if (!string.IsNullOrWhiteSpace(name))
+                query = query.Where(d => d.name == name);
+            if (!string.IsNullOrWhiteSpace(surface))
+                query = query.Where(d => d.Surface == surface);
+
+            if(page.HasValue)
+                query = query.Skip(page.Value * length);
+            
+            query = query.Take(length);
+
+            return query.ToList();
         }
 
         [Route("{id}")]
