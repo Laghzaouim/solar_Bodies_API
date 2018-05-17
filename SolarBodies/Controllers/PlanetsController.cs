@@ -34,19 +34,47 @@ namespace Planets.Controllers
         }
 
         [HttpGet]         // api/v1/planets
-        public List<Planet> GetAllPlanet(string name, string surface, int? page, int length = 2 )
+        public List<Planet> GetAllPlanet(string name, string surface, int? page, string sort, int length = 2, string dir = "asc")
         {
             IQueryable<Planet> query = context.Planets;
 
+            //search or filter
             if (!string.IsNullOrWhiteSpace(name))
                 query = query.Where(d => d.name == name);
             if (!string.IsNullOrWhiteSpace(surface))
                 query = query.Where(d => d.Surface == surface);
 
-            if(page.HasValue)
+            //pagging
+            if (page.HasValue)
                 query = query.Skip(page.Value * length);
-            
+            //length of a page
             query = query.Take(length);
+
+            //sorting
+            if (!string.IsNullOrEmpty(sort))
+            {
+                switch (sort)
+                {
+                    case "name":
+                        if (dir == "asc")
+                            query = query.OrderBy(d => d.name);
+                        else if (dir == "desc")
+                            query = query.OrderByDescending(d => d.name);
+                        break;
+                    case "diameter":
+                        if (dir == "asc")
+                            query = query.OrderBy(d => d.Diameter);
+                        else if (dir == "desc")
+                            query = query.OrderByDescending(d => d.Diameter);
+                        break;
+                    case "distanceFromSun":
+                        if (dir == "asc")
+                            query = query.OrderBy(d => d.DistanceFromSun);
+                        else if (dir == "desc")
+                            query = query.OrderByDescending(d => d.DistanceFromSun);
+                        break;
+                }
+            }
 
             return query.ToList();
         }
