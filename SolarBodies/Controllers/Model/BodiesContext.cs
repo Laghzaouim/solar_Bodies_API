@@ -8,6 +8,6 @@ namespace Model
         {
         }
         public DbSet<Planet> Planet { get; set; }
-        public DbSet<DwarfPlanet> DwarfPlanet { get; set; }
+        public DbSet<Moon> Moon { get; set; }
     }
 }

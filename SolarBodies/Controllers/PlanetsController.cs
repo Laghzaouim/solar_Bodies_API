@@ -30,8 +30,6 @@ namespace Planets.Controllers
             return Ok(planet);
         }
 
-
-
         [HttpGet]         // api/v1/planets
         public List<Planet> GetAllPlanet()
         {

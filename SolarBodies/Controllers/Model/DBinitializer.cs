@@ -18,13 +18,12 @@ namespace Model
                 };
                 context.Planet.Add(Earth);
                 
-                var Pluto = new DwarfPlanet(){
-                    name = "Pluto",
-                    DistanceFromSun = 39.5,
-                    Surface = "Rocky",
-                    Diameter = 1700
+                var Moon = new Moon(){
+                    name = "Moon",
+                    Diameter = 700,
+
                 };
-                context.DwarfPlanet.Add(Pluto);
+                context.Moon.Add(Moon);
                 context.SaveChanges();
             }
         }
