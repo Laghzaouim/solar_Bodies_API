@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 
-namespace SolarBodies.Controllers
+namespace Planets.Controllers
 {
     [Route("api/v1/[controller]")]
     public class PlanetsController : Controller
@@ -18,22 +18,23 @@ namespace SolarBodies.Controllers
             this.context = context;
         }
 
-        [Route("{id}")]   // api/v1/SolarBodies/2
+        [Route("{id}")]   // api/v1/planets/2
         [HttpGet]
         public IActionResult GetPlanet(int id)
         {
+            var planet = context.Planet.Find(id);
 
+            if (planet == null)
+                return NotFound();
 
-            return Ok();
+            return Ok(planet);
         }
 
 
 
-        [HttpGet]         // api/v1/SolarBodies
+        [HttpGet]         // api/v1/planets
         public List<Planet> GetAllPlanet()
         {
-
-
             return context.Planet.ToList();
         }
 
@@ -41,6 +42,12 @@ namespace SolarBodies.Controllers
         [HttpDelete]
         public IActionResult DeletePlanet(int id)
         {
+            var planet = context.Planet.Find(id);
+            if (planet == null)
+                return NotFound();
+
+            context.Planet.Remove(planet);
+            context.SaveChanges();
 
             return NoContent();
         }
@@ -48,6 +55,9 @@ namespace SolarBodies.Controllers
         [HttpPost]
         public IActionResult CreatePlanet([FromBody] Planet newPlanet)
         {
+
+            context.Planet.Add(newPlanet);
+            context.SaveChanges();
 
 
             return Created("", newPlanet);
@@ -57,8 +67,19 @@ namespace SolarBodies.Controllers
         [HttpPut]
         public IActionResult UpdatePlanet([FromBody] Planet updatePlanet)
         {
+            var planet = context.Planet.Find(updatePlanet.Id);
+            if (planet == null)
+                return NotFound();
 
-            return Ok();
+            planet.name = updatePlanet.name;
+            planet.Diameter = updatePlanet.Diameter;
+            planet.DistanceFromSun = updatePlanet.DistanceFromSun;
+            planet.Description = updatePlanet.Description;
+            planet.Surface = updatePlanet.Surface;
+
+            context.SaveChanges();
+
+            return Ok(planet);
         }
     }
 }
