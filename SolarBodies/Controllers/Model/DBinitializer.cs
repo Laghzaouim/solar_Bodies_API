@@ -8,22 +8,23 @@ namespace Model
 
             //Planet pl = new Planet();
 
-            if(!context.Planet.Any()){
+            if(!context.Planets.Any()){
 
-                var Earth = new Planet(){
-                    name = "Earth",
-                    DistanceFromSun = 1,
-                    Surface = "Rocky",
-                    Diameter = 12756
-                };
-                context.Planet.Add(Earth);
                 
                 var Moon = new Moon(){
                     name = "Moon",
                     Diameter = 700,
 
                 };
-                context.Moon.Add(Moon);
+                var Earth = new Planet(){
+                    name = "Earth",
+                    DistanceFromSun = 1,
+                    Surface = "Rocky",
+                    Diameter = 12756,
+                    Moon = Moon
+                };
+                context.Planets.Add(Earth);
+                context.Moons.Add(Moon);
                 context.SaveChanges();
             }
         }

@@ -7,7 +7,7 @@ namespace Model
         public BodiesContext(DbContextOptions<BodiesContext> options) : base(options)
         {
         }
-        public DbSet<Planet> Planet { get; set; }
-        public DbSet<Moon> Moon { get; set; }
+        public DbSet<Planet> Planets { get; set; }
+        public DbSet<Moon> Moons { get; set; }
     }
 }

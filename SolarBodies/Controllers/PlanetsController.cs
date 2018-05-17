@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Model;
 
 namespace Planets.Controllers
@@ -22,7 +23,9 @@ namespace Planets.Controllers
         [HttpGet]
         public IActionResult GetPlanet(int id)
         {
-            var planet = context.Planet.Find(id);
+            var planet = context.Planets
+                .Include(d => d.Moon)
+                .SingleOrDefault(d => d.Id == id);
 
             if (planet == null)
                 return NotFound();
@@ -33,18 +36,18 @@ namespace Planets.Controllers
         [HttpGet]         // api/v1/planets
         public List<Planet> GetAllPlanet()
         {
-            return context.Planet.ToList();
+            return context.Planets.ToList();
         }
 
         [Route("{id}")]
         [HttpDelete]
         public IActionResult DeletePlanet(int id)
         {
-            var planet = context.Planet.Find(id);
+            var planet = context.Planets.Find(id);
             if (planet == null)
                 return NotFound();
 
-            context.Planet.Remove(planet);
+            context.Planets.Remove(planet);
             context.SaveChanges();
 
             return NoContent();
@@ -54,7 +57,7 @@ namespace Planets.Controllers
         public IActionResult CreatePlanet([FromBody] Planet newPlanet)
         {
 
-            context.Planet.Add(newPlanet);
+            context.Planets.Add(newPlanet);
             context.SaveChanges();
 
 
@@ -65,7 +68,7 @@ namespace Planets.Controllers
         [HttpPut]
         public IActionResult UpdatePlanet([FromBody] Planet updatePlanet)
         {
-            var planet = context.Planet.Find(updatePlanet.Id);
+            var planet = context.Planets.Find(updatePlanet.Id);
             if (planet == null)
                 return NotFound();
 
