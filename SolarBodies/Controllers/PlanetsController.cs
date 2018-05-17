@@ -72,7 +72,6 @@ namespace Planets.Controllers
             planet.name = updatePlanet.name;
             planet.Diameter = updatePlanet.Diameter;
             planet.DistanceFromSun = updatePlanet.DistanceFromSun;
-            planet.Description = updatePlanet.Description;
             planet.Surface = updatePlanet.Surface;
 
             context.SaveChanges();

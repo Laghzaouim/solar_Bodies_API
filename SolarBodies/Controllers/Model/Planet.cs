@@ -7,6 +7,7 @@ namespace Model
         public string Surface { get; set; }
         public double Diameter { get; set; }
         public double DistanceFromSun { get; set; }
-        public string Description { get; set; }
+        public Moon Moon { get; set; }
+        // int MoonId { get; set; }
     }
 }
