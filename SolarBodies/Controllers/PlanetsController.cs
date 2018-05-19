@@ -33,10 +33,24 @@ namespace Planets.Controllers
             return Ok(planet);
         }
 
+        [Route("{id}/moon")]   // api/v1/planets/2/moon
+        [HttpGet]
+        public IActionResult GetAuthorBook(int id)
+        {
+            var planet = context.Planets
+                .Include(d => d.Moon)
+                .Single(d => d.Id == id);
+
+            if (planet == null)
+                return NotFound();
+
+            return Ok(planet.Moon);
+        }
+
         [HttpGet]         // api/v1/planets
         public List<Planet> GetAllPlanet(string name, string surface, int? page, string sort, int length = 2, string dir = "asc")
         {
-            IQueryable<Planet> query = context.Planets;
+            IQueryable<Planet> query = context.Planets.Include(d => d.Moon);
 
             //search or filter
             if (!string.IsNullOrWhiteSpace(name))
