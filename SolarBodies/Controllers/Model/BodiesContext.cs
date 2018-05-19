@@ -2,9 +2,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Model
 {
-    public class BodiesContext : DbContext
+    public class SolarBodiesContext : DbContext
     {
-        public BodiesContext(DbContextOptions<BodiesContext> options) : base(options)
+        public SolarBodiesContext(DbContextOptions<SolarBodiesContext> options) : base(options)
         {
         }
         public DbSet<Planet> Planets { get; set; }

@@ -13,8 +13,8 @@ namespace Planets.Controllers
     {
         private static List<Planet> list = new List<Planet>();
 
-        private readonly BodiesContext context;
-        public PlanetsController(BodiesContext context)
+        private readonly SolarBodiesContext context;
+        public PlanetsController(SolarBodiesContext context)
         {
             this.context = context;
         }

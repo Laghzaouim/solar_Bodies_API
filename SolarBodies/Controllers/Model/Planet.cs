@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
 namespace Model
 {
     public class Planet
@@ -7,7 +10,7 @@ namespace Model
         public string Surface { get; set; }
         public double Diameter { get; set; }
         public double DistanceFromSun { get; set; }
-        public Moon Moon { get; set; }
-        // int MoonId { get; set; }
+        public Moon Moon { get; set; } 
+ 
     }
 }
