@@ -31,8 +31,6 @@ public class AsteroidsController : Controller
     [HttpGet]         // api/v1/Asteroids
     public List<Asteroid> GetAllAsteroid()
     {
-        
-
         return context.Asteroids.ToList();
     }
 
