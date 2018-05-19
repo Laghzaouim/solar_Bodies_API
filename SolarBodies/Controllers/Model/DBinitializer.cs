@@ -65,6 +65,16 @@ namespace Model
                 context.Asteroids.Add(_52Europa);
                 context.SaveChanges();
             }
+
+            if(!context.SBodies.Any()){
+                var SBodies = new SBodies(){
+                    Planets = "http://localhost:5000/api/v1/planets/",
+                    Asteroids = "http://localhost:5000/api/v1/Asteroids"
+                };
+
+                context.SBodies.Add(SBodies);
+                context.SaveChanges();
+            }
         }
     }
 }
