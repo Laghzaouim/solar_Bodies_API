@@ -114,7 +114,6 @@ namespace Planets.Controllers
             context.Planets.Add(newPlanet);
             context.SaveChanges();
 
-
             return Created("", newPlanet);
 
         }
