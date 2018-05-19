@@ -115,7 +115,6 @@ namespace Planets.Controllers
             context.SaveChanges();
 
             return Created("", newPlanet);
-
         }
 
         [HttpPut]

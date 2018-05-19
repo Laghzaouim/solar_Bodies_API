@@ -9,5 +9,7 @@ namespace Model
         }
         public DbSet<Planet> Planets { get; set; }
         public DbSet<Moon> Moons { get; set; }
+
+        public DbSet<Asteroid> Asteroids { get; set; }
     }
 }

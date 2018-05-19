@@ -47,10 +47,22 @@ namespace Model
                     Moon = Deimos
 
                 };
-
                 context.Planets.Add(Mars);
                 context.Moons.Add(Deimos);
 
+                context.SaveChanges();
+            }
+
+            if (!context.Asteroids.Any())
+            {
+                var _52Europa = new Asteroid()
+                {
+                    name = "52 Europa",
+                    Diameter = 315,
+                    Origin = "Asteroid belt",
+                    Shape = "triaxial ellipsoid"
+                };
+                context.Asteroids.Add(_52Europa);
                 context.SaveChanges();
             }
         }
