@@ -48,7 +48,7 @@ namespace Planets.Controllers
         }
 
         [HttpGet]         // api/v1/planets
-        public List<Planet> GetAllPlanet(string name, string surface, int? page, string sort, int length = 2, string dir = "asc")
+        public List<Planet> GetAllPlanet(string name, string surface, int? page, string sort, int length = 10, string dir = "asc")
         {
             IQueryable<Planet> query = context.Planets.Include(d => d.Moon);
 
@@ -111,7 +111,9 @@ namespace Planets.Controllers
         public IActionResult CreatePlanet([FromBody] Planet newPlanet)
         {
 
-            context.Planets.Add(newPlanet);
+
+            if (newPlanet != null)
+                context.Planets.Add(newPlanet);
             context.SaveChanges();
 
             return Created("", newPlanet);
